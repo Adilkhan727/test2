@@ -1,7 +1,7 @@
 const crmFormId = '234f09f7-c1b3-4154-8632-ba3fa6134f0d';
 const crmEndpoint = `https://crm.tennet.kz/api/public/forms/${crmFormId}/`;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const method = req.method || 'GET';
   const headers = {
     Accept: 'application/json',
@@ -26,4 +26,4 @@ export default async function handler(req, res) {
   } catch (error) {
     res.status(502).json({ error: 'CRM proxy failed', detail: String(error) });
   }
-}
+};
