@@ -1,10 +1,10 @@
 const crmFormId = '234f09f7-c1b3-4154-8632-ba3fa6134f0d';
 const crmEndpoint = `https://crm.tennet.kz/api/public/forms/${crmFormId}/`;
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req, res) {
   const method = req.method || 'GET';
-  const headers: Record<string, string> = {
-    'Accept': 'application/json',
+  const headers = {
+    Accept: 'application/json',
     'User-Agent': 'UPgradeSchool-CRM-Proxy',
   };
 
@@ -19,10 +19,10 @@ export default async function handler(req: any, res: any) {
       body: method === 'POST' ? JSON.stringify(req.body) : undefined,
     });
 
-    const text = await response.text();
+    const body = await response.text();
     res.status(response.status);
     res.setHeader('Content-Type', response.headers.get('content-type') || 'application/json');
-    res.send(text);
+    res.send(body);
   } catch (error) {
     res.status(502).json({ error: 'CRM proxy failed', detail: String(error) });
   }
